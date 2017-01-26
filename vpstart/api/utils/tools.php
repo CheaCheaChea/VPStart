@@ -3,10 +3,7 @@
 function getConnection()
 {
     $servername = "localhost";
-    //sandbox
-   /* $username   = "user_vpstartgrid";
-    $password   = "*P{;vm-ZKOG@";
-    $dbname     = "drc001_vpstartgrid";*/
+   
     
     //local
     $username = "root";
