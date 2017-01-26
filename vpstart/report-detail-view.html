@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en" >
+	<head>
+		<link href="https://fonts.googleapis.com/css?family=Muli:400,400i,600,600i,700,700i" rel="stylesheet">
+		<link rel="stylesheet" href="css/font-awesome.css">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/jquery-ui.min.css">
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/Chart.js"></script>
+		<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+
+		
+
+	</head>
+	<body>
+		<div class="container">
+			<div class="reportDetailWrapper">
+				<div class="blockLeft">
+					<div class="locationName">
+						<h2 class="titleH2 elip">
+							<span><i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							EDC Siem Reap
+						</h2>
+					</div>
+					<div class="listLocationWrapper">
+						<ul class="list">
+							
+						</ul>
+					</div>
+				</div>
+				<div class="blockRight">
+					<div class="rightHeaderWrapper">
+						<div class="setLeft pl spacingTopSm wrapBtnHeader">
+							<button class="btn btnCreateReport">Create Report</button>
+						</div>
+						<div class="setLeft wrapTextHeader">
+							<div class="setLeft textHeader fullWidth">
+								Name: <span class="vpStarName">SR MPT168</span>,  
+								VPStartID: <span class="vpStartId">010101010100110</span>,
+								Device: <span class="deviceId">DRC001</span>
+							</div>
+						</div>
+					</div>
+					<div class="rightContentWrapper" id="reportDetail">
+						<!-- Chart -->
+						<div class="sectionWrapper spacingTop">
+							<div class="setLeft fullWidth wrapChartAction relativeMe">
+								<div class="setLeft relativeBtn" >
+									<select class="viewBy singleSelect powerSelect">
+										<option value="daily">Today</option>
+										<option value="monthly">Monthly</option>
+										<option value="yearly">Yearly</option>
+									</select>
+								</div>
+								<div class="centerMe sectionTitle">
+									Apparent Power
+								</div>
+							</div>
+							<div class="setLeft fullWidth wrapChartContent">
+								<canvas class="spacingTop whiteBg" width="800" height="120" id="chart_canvas"></canvas>
+							</div>
+						</div>
+						<!-- Instaneous Value -->
+						<div class="sectionWrapper spacingTop">
+							<div class="setLeft fullWidth relativeMe">
+								<div class="setLeft relativeBtn">
+									<button class="btn">Export</button>
+								</div>
+								<div class="centerMe sectionTitle">
+									Power Value
+								</div>
+								<div class="setLeft fullWidth tableContent spacingTop table--class">
+									<table class="power">
+								 	<thead>
+								 		<tr>
+										    <th>Date time</th>
+										    <th>Switchgear State</th>
+										    <th>Current A</th>
+										    <th>Current B</th>
+										    <th>Current C</th>
+										    <th>Current Ground</th>
+										    <th>Voltage AB</th>
+										    <th>Voltage BC</th>
+										    <th>Voltage CA</th>
+										    <th>Apparent Power</th>
+										    <th>Real Power</th>
+										    <th>Reactive Power</th>
+										    <th>Power Factor</th>
+										    <th>Frequency</th>
+								  		</tr>
+								  	</thead>
+								  	<tbody></tbody>
+								  		
+									</table>
+								</div>
+							</div>
+						</div>
+						<!-- Instaneous Value -->
+						<div class="sectionWrapper spacingTop spacingBottom">
+							<div class="setLeft fullWidth relativeMe">
+								<div class="setLeft pr relativeBtn">
+									<button class="btn">Export</button>
+								</div>
+								<div class="setLeft relativeBtn" >
+									<select class="viewBy singleSelect reportSelect">
+										<option value="daily">Daily</option>
+										<option value="weekly">Weekly</option>
+										<option value="monthly">Monthly</option>
+									</select>
+								</div>
+								<div class="wrapTitleLeft hideMe">
+									<div class="centerMe sectionTitle">
+										Daily, Weekly, Monthly
+									</div>
+								</div>
+								<div class="wrapTitleRight">
+									<div class="centerMe sectionTitle">
+										Event Value
+									</div>
+								</div>
+								<div class="setLeft fullWidth spacingTop">
+									<div class="setLeft width1of2 pr">
+										<div class="setLeft fullWidth tableContent">
+											<table class="report">
+											<thead>
+										 		<tr>
+												    <th>Date</th>
+												    <th>Total kWh</th>
+												    <th>Peak Time</th>
+												    <th>Peak kW</th>
+												    <th>Power Factor</th>
+										  		</tr>
+										  		</thead>
+										  		<tbody></tbody>
+											</table>
+										</div>
+									</div>
+									<div class="setLeft width1of2">
+										<div class="setLeft fullWidth tableContent">
+											<table class="event">
+											<thead>
+										 		<tr>
+												    <th>Date Time</th>
+												    <th>Milli second</th>
+												    <th>Source</th>
+												    <th>Event Text</th>
+										  		</tr>
+										  		</thead>
+										  		<tbody></tbody>
+											  														
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="rightContentWrapper whiteBg hideMe" id="printDetail">
+						<div class="setLeft fullWidth spacingTop wrapActionPrint">
+							<div class="setLeft">
+								<button class="btn btnBack"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</button>
+							</div>
+							<div class="setRight">
+								<button class="btn btnPrint"><i class="fa fa-print" aria-hidden="true"></i> Print</button>
+							</div>
+						</div>
+						<div class="setLeft fullWidth sectionPrintWrapper" id="sectionPrintWrapper">
+							<div class="setLeft fullWidth spacingTop deviceTitle">Name: SR MPT168, VPstartID: 85510780222, Device: DRC001</div>
+							<!-- Chart For Print -->
+							<div class="setLeft fullWidth chartPrintWrapper">
+								<div class="setLeft fullWidth spacingTop boldMe">
+									Apparent Power
+								</div>
+								<div class="setLeft fullWidth wrapChartContent">
+									<canvas class=" hiteBg" width="800" height="120" id="chart_canvas_print"></canvas>
+								</div>
+							</div>
+							<!-- View By Daily-->
+							<div class="setLeft fullWidth powerValuePrintWrapper">
+								<div class="setLeft fullWidth spacingTop boldMe">
+									Daily
+								</div>
+								<div class="setLeft fullWidth tableContent spacingTop autoHeight">
+									<table>
+									 	<thead>
+									 		<tr>
+											    <th>Date</th>
+											    <th>Total kWh</th>
+											    <th>Peak Time</th>
+											    <th>Peak kW</th>
+											    <th>Power Factor</th>
+									  		</tr>
+									  	</thead>
+									  	<tbody>
+									  		<tr>
+											    <td>12.01.2017 / 08:56:00</td>
+											    <td>1</td>
+											    <td>4</td>
+											    <td>3</td>
+											    <td>3</td>
+									  		</tr>
+									  	</tbody>
+								  		
+									</table>
+								</div>
+							</div>
+							<!-- View By Weekly-->
+							<div class="setLeft fullWidth powerValuePrintWrapper">
+								<div class="setLeft fullWidth spacingTop boldMe">
+									Weekly
+								</div>
+								<div class="setLeft fullWidth tableContent spacingTop autoHeight">
+									<table>
+									 	<thead>
+									 		<tr>
+											    <th>Date</th>
+											    <th>Total kWh</th>
+											    <th>Peak Time</th>
+											    <th>Peak kW</th>
+											    <th>Power Factor</th>
+									  		</tr>
+									  	</thead>
+									  	<tbody>
+									  		<tr>
+											    <td>12.01.2017 / 08:56:00</td>
+											    <td>1</td>
+											    <td>4</td>
+											    <td>3</td>
+											    <td>3</td>
+									  		</tr>
+									  	</tbody>
+								  		
+									</table>
+								</div>
+							</div>
+							<!-- View By Monthly-->
+							<div class="setLeft fullWidth powerValuePrintWrapper">
+								<div class="setLeft fullWidth spacingTop boldMe">
+									Monthly
+								</div>
+								<div class="setLeft fullWidth tableContent spacingTop autoHeight">
+									<table>
+									 	<thead>
+									 		<tr>
+											    <th>Date</th>
+											    <th>Total kWh</th>
+											    <th>Peak Time</th>
+											    <th>Peak kW</th>
+											    <th>Power Factor</th>
+									  		</tr>
+									  	</thead>
+									  	<tbody>
+									  		<tr>
+											    <td>12.01.2017 / 08:56:00</td>
+											    <td>1</td>
+											    <td>4</td>
+											    <td>3</td>
+											    <td>3</td>
+									  		</tr>
+									  	</tbody>
+								  		
+									</table>
+								</div>
+							</div>
+							<!-- Event Value -->
+							<div class="setLeft fullWidth powerValuePrintWrapper">
+								<div class="setLeft fullWidth spacingTop boldMe">
+									Event Value
+								</div>
+								<div class="setLeft fullWidth tableContent spacingTop autoHeight">
+									<table>
+									 	<thead>
+									 		<tr>
+											    <th>Date Time</th>
+											    <th>Milli second</th>
+											    <th>Source</th>
+											    <th>Event Text</th>
+									  		</tr>
+									  	</thead>
+									  	<tbody>
+									  		<tr>
+											    <td>12.01.2017 / 08:56:00</td>
+											    <td>1</td>
+											    <td>4</td>
+											    <td>3</td>
+									  		</tr>
+									  	</tbody>
+								  		
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="popupWrapper">
+			<div class="popupBackground"></div>
+			<div class="popupBox">
+				<div class="popupTitle">Create Report</div>
+				<div class="popupBody popupContainer">
+					<div class="setLeft fullWidth">
+						<div class="width1of2 setLeft">
+							<div class="wrapLabel pr setLeft">
+								Start Date:
+							</div>
+							<div class="wrapValue pr setLeft">
+								<input type="text" class="inputDatePicker startDate" name="startDate" />
+							</div>
+						</div>
+						<div class="width1of2 setLeft">
+							<div class="wrapLabel pr setLeft">
+								Until Date:
+							</div>
+							<div class="wrapValue setLeft">
+								<input type="text" class="inputDatePicker untilDate" name="untilDate" />
+							</div>
+						</div>
+					</div>
+					<div class="setLeft fullWidth spacingTop">
+						<select class="selectedDevice" multiple="multiple" size="5">
+							
+						</select>
+					</div>
+					<div class="setLeft spacingTop">
+						<input type="checkbox" class="includeChart" /> <span style="color: #fff;">Check for include chart</span>
+					</div>
+					<div class="setLeft relativeBtn pl spacingTopSm" >
+						<select class="viewBy singleSelect">
+							<option value="today">Today</option>
+							<option value="week">Week</option>
+							<option value="all">All</option>
+						</select>
+					</div>
+				</div>
+				<div class="popupFooter">
+					<button class="btn ok">Ok</button>
+					<button class="btn spacingLeft cancel">Cancel</button>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var myLineChart,curentDevice ;
+			
+			$(document).ready(function(){
+
+				$( ".powerSelect" ).change(function() {
+				  	var name =  curentDevice.name;
+					var device = curentDevice.devName;
+					var chartType = $(this).val();
+				  	queryPowerChart(device,name,chartType);
+				});
+
+				$( ".reportSelect" ).change(function() {
+				  	
+					console.log('val===',$(this).val());
+				  	//queryPowerChart(device,name,chartType);
+				});
+				
+
+				function failureCallback(msg) {
+			        console.log('failed call back====',msg);
+			    }
+				function sucessRequestDevice( data){
+					
+					var curListDevice = $('.listLocationWrapper ul.list');
+					$.each(data.records, function( index, record ) {
+						var listItem = $('<li class="listItem elip"><span class="listIcon"><i class="fa fa-map-o" aria-hidden="true"></i></span><span class="deviceLabel"></span></li>');
+						listItem.find('.deviceLabel').text(record.name);
+						listItem.attr('deviceId', record.Id);
+						listItem.attr('deviceName', record.name);
+						listItem.attr('deviceType', record.type);
+						listItem.attr('device', record.device);
+						listItem.attr('vpStartId', record.VPstartID);
+						listItem.attr('deviceSerialSwitch', record.serialSwitch);
+						curListDevice.append(listItem);
+						var optionItem = $('<option></option>');
+						optionItem.text(record.name);
+						optionItem.val(record.Id);
+						$('.selectedDevice').append(optionItem);
+					});
+					
+					$('.list li').off('click').on('click', function() {
+						
+						var name =  $(this).attr('deviceName');
+						var device = $(this).attr('device');
+						var vpStartId = $(this).attr('vpStartId');
+						var data = {'devName': device , 'name':name , 'type':'queryAll'};
+						curentDevice = data;
+						var chartType = $( ".powerSelect option:selected" ).val();
+						queryPowerChart(device,name,chartType);
+						
+						$('.vpStarName').text(name);
+						$('.deviceId').text(device);
+						$('.vpStartId').text(vpStartId);
+
+						
+						$.ajax({
+							url: 'api/query.php',
+							success: function(data){
+								if(data.sucess){
+									//power
+									var curPowerBody = $('.power tbody').html('');
+									//console.log('data',data);
+									if(data.power) {
+										$.each(data.power, function( index, record ) {
+											var tr =$("<tr><td>" + record.dateTime+"</td><td>"+ record.switchgearState +"</td><td>" +record.currentA+"</td><td>"+ record.currentB+"</td><td>" + record.currentC+"</td><td>"+ record.currentGround +"</td><td>" + record.voltageAB+"</td><td>"+ record.voltageBC+"</td><td>" +record.voltageCA+"</td><td>"+ record.apparentPower+"</td><td>" + record.realPower+"</td><td>"+ record.reactivePower +"</td><td>" +  record.powerFactor+"</td><td>"+record.frequency+"</td></tr>");
+											$('.power tbody').append(tr);
+										});
+
+									}
+									
+									//event
+									var curReportBody = $('.report tbody').html('');
+									if(data.report) {
+										$.each(data.report, function( index, record ) {
+											var tr =$("<tr>><td>" + record.currentDate+"</td><td>"+ record.totalkWh +"</td><td>" +record.peakTime+"</td><td>"+ record.peakkW+"</td><td>" + record.powerFactor+"</td></tr>");
+											$('.report tbody').append(tr);
+										});
+									}
+									//report
+									var curEventBody = $('.event tbody').html('');
+									if(data.event) {
+										$.each(data.event, function( index, record ) {
+											var tr =$("<tr><td>" + record.dateTime+"</td><td>"+ record.millisecond +"</td><td>" +record.source+"</td><td>"+ record.eventText+"</td></tr>");
+											$('.event tbody').append(tr);
+										});
+									}
+									
+									
+								}
+								
+							},
+							error: failureCallback,
+							type: "POST",
+							data: data,
+							dataType:"json"
+						});
+
+
+						
+					});
+
+					$('.list').find('li').eq(0).click();
+
+
+				}
+				$.ajax({
+					url: 'api/query.php',
+					success: sucessRequestDevice,
+					error: failureCallback,
+					type: "POST",
+					data: {data: 'device' , con:'limit 50',type:'Device' },
+					dataType:"json"
+				});
+				var ctx = document.getElementById('chart_canvas').getContext('2d');
+				var data = {
+				    labels: ["", ],
+				    datasets: [
+				        {
+				            label: "",
+				            fill: false,
+				            lineTension: 0.1,
+				            backgroundColor: "rgba(75,192,192,0.4)",
+				            borderColor: "rgba(75,192,192,1)",
+				            borderCapStyle: 'butt',
+				            borderDash: [],
+				            borderDashOffset: 0.0,
+				            borderJoinStyle: 'miter',
+				            pointBorderColor: "rgba(75,192,192,1)",
+				            pointBackgroundColor: "#fff",
+				            pointBorderWidth: 1,
+				            pointHoverRadius: 5,
+				            pointHoverBackgroundColor: "rgba(75,192,192,1)",
+				            pointHoverBorderColor: "rgba(220,220,220,1)",
+				            pointHoverBorderWidth: 2,
+				            pointRadius: 1,
+				            pointHitRadius: 10,
+				            data: [0],
+				            spanGaps: false,
+				        }
+				    ]
+				};
+				
+				 myLineChart = new Chart(ctx, {
+				    type: 'line',
+				    data: data,
+				    options: {
+				    	
+				    }
+				});
+				/*var chart_canvas_print = document.getElementById('chart_canvas_print').getContext('2d');
+				myLineChart = new Chart(chart_canvas_print, {
+				    type: 'line',
+				    data: data,
+				    options: {
+				    	
+				    }
+				});*/
+				$('.tableContent').on('scroll', function() {
+			        if($(this).scrollTop() + $(this).innerHeight() >= ($(this)[0].scrollHeight + 15)) {
+			           // console.log('end reached');
+			        }
+			    });
+				$('.btnCreateReport').off('click').on('click', function(){
+					$('.popupWrapper').show();
+				});
+				$('.cancel').off('click').on('click', function(){
+					$('.popupWrapper').hide();
+				});
+				$('.ok').off('click').on('click', function(){
+					$('#reportDetail').hide();
+					$('#printDetail').show();
+					$('.popupWrapper').hide();
+				});
+				$('.btnBack').off('click').on('click', function(){
+					$('#printDetail').hide();
+					$('#reportDetail').show();
+				});
+				$('.btnPrint').off('click').on('click', function(){
+					$('body').addClass('isPrinting');
+				     window.print();
+				     $('body').removeClass('isPrinting');
+				});
+				$('.inputDatePicker').datepicker();
+				var date = new Date(), y = date.getFullYear(), m = date.getMonth();
+				$('.startDate').datepicker('setDate', new Date(y, m, 1));
+				$('.untilDate').datepicker('setDate', new Date());
+				$( ".inputDatePicker" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
+			});
+
+			function refreshChart(data) {
+
+				myLineChart.destroy();
+				var ctx = document.getElementById('chart_canvas').getContext('2d');	
+				myLineChart = new Chart(ctx, {
+				    type: 'line',
+				    data: data,
+				    options: {
+				    	
+				    }
+				});
+
+			}
+
+			function queryPowerChart(device,name,chartType){
+
+				var data = {'devName': device , 'name':name , 'type':'queryPowerChart','chartType':chartType};
+
+				$.ajax({
+					url: 'api/query.php',
+					success: function(data){
+						console.log('queryPowerChart=====',data);
+						if(data.sucess){
+							var dataChart = {
+									    labels: data.label,
+									    datasets: [
+									        {
+									            label: "",
+									            fill: false,
+									            lineTension: 0.1,
+									            backgroundColor: "rgba(75,192,192,0.4)",
+									            borderColor: "rgba(75,192,192,1)",
+									            borderCapStyle: 'butt',
+									            borderDash: [],
+									            borderDashOffset: 0.0,
+									            borderJoinStyle: 'miter',
+									            pointBorderColor: "rgba(75,192,192,1)",
+									            pointBackgroundColor: "#fff",
+									            pointBorderWidth: 1,
+									            pointHoverRadius: 5,
+									            pointHoverBackgroundColor: "rgba(75,192,192,1)",
+									            pointHoverBorderColor: "rgba(220,220,220,1)",
+									            pointHoverBorderWidth: 2,
+									            pointRadius: 1,
+									            pointHitRadius: 10,
+									            data: data.data,
+									            spanGaps: false,
+									        }
+									    ]
+									};
+
+									refreshChart(dataChart);
+
+									//power
+									var curPowerBody = $('.power tbody').html('');
+									//console.log('data',data);
+									if(data.power) {
+										$.each(data.power, function( index, record ) {
+											var tr = chartType =='daily' ?
+
+											$("<tr><td>" + record.dateTime+"</td><td>"+ record.switchgearState +"</td><td>" +record.currentA+"</td><td>"+ record.currentB+"</td><td>" + record.currentC+"</td><td>"+ record.currentGround +"</td><td>" + record.voltageAB+"</td><td>"+ record.voltageBC+"</td><td>" +record.voltageCA+"</td><td>"+ record.apparentPower+"</td><td>" + record.realPower+"</td><td>"+ record.reactivePower +"</td><td>" +  record.powerFactor+"</td><td>"+record.frequency+"</td></tr>")
+
+											: 
+
+											$("<tr><td>---</td><td>---</td><td>---</td><td>---</td><td>---</td><td>----</td><td>---</td><td>---</td><td>---</td><td>"+ (record.TotalPower == null ? 0 : record.TotalPower )+"</td><td>---</td><td>---</td><td>---</td><td>---</td></tr>");
+											$('.power tbody').append(tr);
+										});
+										$('.power').show();
+									}
+									
+
+						}
+
+						
+
+					},
+					error: function(msg){
+						console.log('Error===='+ msg);
+					},
+					type: "POST",
+					data: data,
+					dataType:"json"
+				});
+			}
+		</script>
+	</body>
+</html>

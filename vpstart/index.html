@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" >
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+        
+        
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        
+		
+		<style type="text/css">
+			table {
+			    border-collapse: collapse;
+			    width: 100%;
+			}
+
+			table, th, td {
+			    border: 1px solid darkgray;
+			     color: #202020;
+
+			}
+			table td {
+				text-align: center
+			}
+
+			.errorInfo {
+					background-color: #ffffe2;
+				    float: left;
+				    width: 100%;
+				    border: 1px solid #f90;
+				    border-radius: 3px;
+				    padding-top: 20px;
+				    padding-bottom: 20px;
+				    font-size: 16px;
+				    margin-bottom: 10px;
+				    
+
+			}
+
+			.errorInfo span {
+				padding-left: 20px;
+				 color: #202020;
+			}
+
+			h1 {
+				border-bottom: 1px solid #002e5c;
+			    margin: 10px 0 ;
+			    font-weight: normal;
+			    font-size: 18px;
+			    color: #002E5C;
+
+			}
+			
+
+			.btnSection {
+				text-align: center;
+				margin-top: 10px;
+			}
+
+			.btnSection button {
+				cursor: pointer;
+				padding: 5px 5px;
+				border-radius: 3px;
+			}
+
+		</style>
+		<title>VP star test</title>
+	</head>
+<body>
+	<div >
+		<div  style="display: none;" class="errorInfo"></div>
+		<div >
+			<h1>List of User(s)</h1>
+			<table id="tblUser">
+				<tr>
+					<th>id</th>
+					<th>name</th>
+					<th>last name</th>
+					<th>Address </th>
+					<th>Location</th>
+				</tr>
+
+			</table>
+		</div>
+		<div>
+			<h1>List of Device(s)</h1>
+			<table id="tblDevice">
+				<tr>
+					<th>id</th>
+					<th>name</th>
+					<th>Type</th>
+					<th>Device</th>
+					<th>Serial Switch </th>
+					
+				</tr>
+
+			</table>
+
+		</div>
+
+	</div>
+	<div class="btnSection" >
+		<button type="button" class="newDevice" >Insert Device</button>
+		<button type="button" class="multipleData" >Insert Multiple Data</button>
+	</div>
+
+	<script type="text/javascript">
+			$(document).ready(function () {
+				
+				//Query record
+				$.ajax({
+					url: 'api/query.php',
+					success: sucessRequest,
+					error: failureCallback,
+					type: "POST",
+					data: {data: 'user' , con:'limit 10' },
+					dataType:"json"
+				});
+
+				$.ajax({
+					url: 'api/query.php',
+					success: sucessRequestDevice,
+					error: failureCallback,
+					type: "POST",
+					data: {data: 'device' , con:'limit 50' },
+					dataType:"json"
+				});
+
+				//init action
+				$( ".newDevice" ).off("click").on( "click", function() {
+
+					$.ajax({
+						url: 'api/insert.php',
+						success: function(data){
+							if(data.sucess){
+								$.ajax({
+									url: 'api/query.php',
+									success: sucessRequestDevice,
+									error: failureCallback,
+									type: "POST",
+									data: {data: 'device' , con:'limit 10' },
+									dataType:"json"
+								});
+
+							}else{
+								$( ".errorInfo" ).html("<span>"+data.msg + "</span>");
+					  			$( ".errorInfo" ).show();
+							}
+
+						},
+						error: failureCallback,
+						type: "POST",
+						data: {data: { name: 'SR MPT169', device:'DRC001', serialSwitch:'NP-418935', type:'DAILY2' } , name:'device' },
+						dataType:"json"
+					});
+
+				});
+
+				$( ".multipleData" ).off("click").on( "click", function() {
+
+					$.ajax({
+						url: 'api/insertMultipleRecord.php',
+						success: function(data){
+							if(data.sucess){
+							 console.log(data);
+							}else{
+								$( ".errorInfo" ).html("<span>"+data.msg + "</span>");
+					  			$( ".errorInfo" ).show();
+							}
+
+						},
+						error: failureCallback,
+						type: "POST",
+						data:{data:[
+							{ VPStartID:85510780223, Name: 'SR MPT169', Device:'DRC001',SerialSwitch:'NP-418935', DataType:'Power',currentA:2,currentB:4,DateTime:'1/3/17 15:08', currentC:5 , currentGround:45, voltageAB:23, voltageBC:32, voltageCA:21, apparentPower:2, realPower:21, reactivePower:21, powerFactor:21, frequency:13,switchgearState:'ON'},
+							{ VPStartID:85510780223, Name: 'SR MPT169', Device:'DRC001',SerialSwitch:'NP-418935', DataType:'Power',currentA:2,currentB:4, DateTime:'1/3/17 15:08',currentC:5 , currentGround:45, voltageAB:23, voltageBC:32, voltageCA:21, apparentPower:2, realPower:21, reactivePower:21, powerFactor:21, frequency:13,switchgearState:'ON'},
+							{ VPStartID:85510780222, Name: 'SR MPT169', Device:'DRC001',SerialSwitch:'NP-418935', DataType:'Power',currentA:2,currentB:4, DateTime:'1/3/17 15:08',currentC:5 , currentGround:45, voltageAB:23, voltageBC:32, voltageCA:21, apparentPower:2, realPower:21, reactivePower:21, powerFactor:21, frequency:13,switchgearState:'ON'},
+							{ VPStartID:85510780222, Name: 'SR MPT169', Device:'DRC001',SerialSwitch:'NP-418935', DataType:'Event4',DateTime:'1/3/17 15:08', currentIndex:'219422',millisecond:'0.29', eventText:'Sensitive Ground Fault Protection Alarm',source:'WSOS'			},
+							{ VPStartID:85510780222, Name: 'SR MPT169', Device:'DRC001',SerialSwitch:'NP-418935', DataType:'WEEKLY2 ',currentDate:'1/2/17',powerFactor:'0',PeakkW:'0',TotalkWh:'0',currentIndex:'219422',PeakTime:'1/2/17 23:59'}								
+
+						]},
+						dataType:"json"
+					});
+
+				});
+
+
+				
+
+
+			});
+
+			function sucessRequestDevice( data){
+				console.log(data);
+				if( data.sucess ) {
+					 $( "#tblDevice" ).html(
+					 	"<tr><td>Id</td>" +
+					  	"<td>name</td>" +
+					  	"<td>Type</td>" +
+					  	"<td>Device</td>" +
+					  	"<td>Seiral Switch</td>" +
+					  	"</tr>"
+					 );
+					$.each(data.records, function( index, record ) {
+					  $( "#tblDevice" ).append( 
+					  	"<tr><td>" + record.Id + "</td>" +
+					  	"<td>" + record.name + "</td>" +
+					  	"<td>" + record.type + "</td>" +
+					  	"<td>" + record.device + "</td>" +
+					  	"<td>" + record.serialSwitch + "</td>" +
+					  	"</tr>"
+					   );
+					  $( ".errorInfo" ).html("<span>Successfully!!!</span>");
+					  $( ".errorInfo" ).show();
+					});
+
+				} else {
+
+					  $( ".errorInfo" ).html("<span>"+data.msg + "</span>");
+					  $( ".errorInfo" ).show();
+					
+				}
+
+			}
+
+			function sucessRequest( data){
+				
+				if( data.sucess ) {
+
+					$.each(data.records, function( index, record ) {
+					  $( "#tblUser" ).append( 
+					  	"<tr><td>" + record.Id + "</td>" +
+					  	"<td>" + record.name + "</td>" +
+					  	"<td>" + record.last_name + "</td>" +
+					  	"<td>" + record.address + "</td>" +
+					  	"<td>" + record.location + "</td>" +
+					  	"</tr>"
+					   );
+					  $( ".errorInfo" ).html("<span>Successfully!!!</span>");
+					  $( ".errorInfo" ).show();
+					});
+
+				} else {
+
+					  $( ".errorInfo" ).html("<span>"+data.msg + "</span>");
+					  $( ".errorInfo" ).show();
+					
+				}
+
+			}
+
+			function failureCallback(msg) {
+		        console.log(msg);
+		    }
+			
+		</script>
+
+</body>
+</html>

@@ -1,0 +1,381 @@
+* {
+	box-sizing: border-box;
+	font-size: 13px;
+}
+html,
+body{
+	height: 100%;
+	font-family: 'Muli', sans-serif;
+	padding: 0;
+	margin: 0;
+	color: #333;
+	font-size: 13px;
+	background-color: #333;
+}
+.container {
+    height: 100%;
+    width: 100%;
+    float: left;
+}
+.reportDetailWrapper {
+    float: left;
+    width: 100%;
+    height: 100%;
+    padding-left: 250px;
+    position: relative;
+}
+.blockLeft {
+    width: 250px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.blockRight {
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+.locationName {
+    float: left;
+    width: 100%;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    height: 51px;
+    border-bottom: 1px solid #fff;
+}
+h2.titleH2 {
+    float: left;
+    width: 100%;
+    font-size: 17px;
+    font-weight: 600;
+    margin: 0;
+}
+.listLocationWrapper {
+    float: left;
+    width: 100%;
+    height: calc(100% - 51px);
+    overflow-y: auto;
+}
+.listLocationWrapper ul.list{
+	float: left;
+	width: 100%;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.listLocationWrapper ul.list li.listItem{
+	float: left;
+    color: #fff;
+    width: 100%;
+    padding: 15px;
+    font-size: 13px;
+    border-bottom: 1px dotted #aaa;
+}
+.listLocationWrapper ul.list li.listItem:last-child{
+	border-bottom-width: 0;
+}
+.listLocationWrapper ul.list li.listItem:hover{
+	color: rgb(70, 76, 89);
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+.listLocationWrapper ul.list li.listItem .listIcon{
+	padding-right: 15px;
+}
+.elip{
+	white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.rightHeaderWrapper{
+	height: 51px;
+    color: #fff;
+    float: left;
+    width: 100%;
+    border-bottom: 1px solid #fff;
+}
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 2px solid transparent;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+    transition: 0.3s ease-out;
+    padding: 5px 10px;
+    font-size: 13px;
+    line-height: 1.357;
+    border-radius: 3px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: #fff;
+    background-color: #02c385;
+}
+.btn:hover{
+	background-color: #08ce8e;
+}
+.setLeft{
+	float: left;
+}
+.setRight{
+	float: right;
+}
+.fullWidth{
+	width: 100%;
+}
+.pr{
+	padding-right: 15px;
+}
+.pl{
+	padding-left: 15px;
+}
+.spacingBottom{
+	margin-bottom: 15px;
+}
+.spacingTopXs{
+	margin-top: 5px;
+}
+.spacingTopSm{
+	margin-top: 10px;
+}
+.spacingTop{
+	margin-top: 15px;
+}
+.wrapBtnHeader {
+    width: 143px;
+}
+.wrapTextHeader {
+    float: left;
+    width: calc(100% - 143px);
+    text-align: center;
+    color: #fff;
+}
+.textHeader {
+    font-weight: 600;
+    font-size: 15px;
+    margin-top: 15px;
+}
+.rightContentWrapper{
+	float: left;
+    width: 100%;
+    height: calc(100% - 51px);
+    overflow-y: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.sectionWrapper {
+    float: left;
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 15px;
+    background-color: #333;
+    border-radius: 2px;
+}
+.centerMe{
+	text-align: center;
+}
+.sectionTitle{
+	top: 5px;
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    color: #fff;
+}
+.relativeMe{
+	position: relative;
+}
+.rightMe{
+	text-align: right;
+}
+.relativeBtn{
+	position: relative;
+	z-index: 1;
+}
+.wrapTitleLeft{
+	width: 50%;
+    position: absolute;
+    left: 0;
+    height: 31px;
+}
+.wrapTitleRight{
+	width: 50%;
+    position: absolute;
+    right: 0;
+    height: 31px;
+}
+.tableContent{
+    border-radius: 2px;
+    overflow-x: auto;
+    box-shadow: 0px 0px 1px #ddd;
+    height: 250px;
+    overflow-y: auto;
+}
+.tableContent table{
+	border-collapse: collapse;
+    width: 100%;
+    background-color: #fff;
+}
+.whiteBg{
+	background-color: #fff;
+}
+.tableContent table th,
+.tableContent table td{
+	border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+.tableContent table th{
+	background-color: #f1f1f1;
+}
+.width1of2{
+	width: 50%;
+}
+.popupTitle{
+	background-color: #333;
+    padding: 18px 15px;
+    color: #ddd;
+    font-size: 18px;
+}
+.popupBox {
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0px 1px 3px #333;
+    width: 100%;
+    position: absolute;
+    max-width: 600px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border: 1px solid #fff;
+    top: 20%;
+}
+.popupContainer {
+    padding: 15px;
+    float: left;
+    width: 100%;
+    background-color: #333;
+    border-bottom: 1px solid #fff;
+    border-top: 1px solid #fff;
+}
+.popupFooter {
+    padding: 15px;
+    background-color: #333;
+    float: left;
+    width: 100%;
+    text-align: center;
+}
+.popupOverlay{
+	width: 90%;
+    border-radius: 2px;
+    overflow: hidden;
+}
+.spacingLeft{
+	margin-left: 15px;
+}
+.popupWrapper {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    height: 100%;
+    display: none;
+}
+.popupBackground{
+	position: fixed;
+    background-color: #333;
+    width: 100%;
+    height: 100%;
+    opacity: .8;
+}
+input[type="text"]{
+	border: 1px solid #333;
+	padding: 7px 10px;
+	line-height: 20px;
+	outline: none !important;
+	width: 100%;
+}
+select[multiple="multiple"]{
+	border: 1px solid #333;
+	width: 100%;
+}
+select[multiple="multiple"] option{
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.wrapLabel{
+	width: 30%;
+	text-align: right;
+	padding-top: 8px;
+	color: #fff;
+}
+.wrapValue{
+	width: 70%;
+}
+table tr td:first-child{
+	white-space: nowrap;
+}
+select.singleSelect {
+    border: 1px solid #fff;
+    padding: 7px 20px 7px 10px !important;
+    background-color: transparent;
+    outline: none !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    background-image: url(../img/picklist-icon.png);
+    background-repeat: no-repeat;
+    background-size: 8px;
+    background-position: right 6px center;
+    border-radius: 3px;
+    color: #fff;
+}
+select.singleSelect:focus{
+	color: #333;
+}
+select.singleSelect::-ms-expand {
+    display: none;
+}
+.hideMe{
+	display: none;
+}
+.deviceTitle{
+	font-size: 18px;
+    color: #333;
+    border-bottom: 1px solid #333;
+    padding-bottom: 15px;
+}
+.boldMe{
+	font-weight: bold;
+}
+.tableContent.autoHeight{
+	height: auto;
+}
+.isPrinting .blockLeft{
+	display: none;
+}
+.isPrinting .reportDetailWrapper{
+	padding-left: 0;
+}
+.isPrinting .rightHeaderWrapper{
+	display: none;
+}
+.isPrinting .wrapActionPrint{
+	display: none;
+}
+.isPrinting .rightContentWrapper{
+	height: 100%;
+}
+body.isPrinting * {
+	font-size: 11px;
+}
